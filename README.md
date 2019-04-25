@@ -32,8 +32,8 @@ done
 echo "" >> /etc/nginx/cloudflare;
 echo "real_ip_header CF-Connecting-IP;" >> /etc/nginx/cloudflare;
 
-service nginx configtest
-service nginx reload
+#test configuration and reload nginx
+nginx -t && systemctl reload nginx
 ```
 
 ## Output
