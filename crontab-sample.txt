@@ -1,0 +1,2 @@
+# Auto sync ip addresses of Cloudflare and reload nginx
+30 2 * * * /opt/scripts/cloudflare-ip-whitelist-sync.sh >/dev/null 2>&1
