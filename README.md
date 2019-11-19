@@ -15,22 +15,25 @@ include /etc/nginx/cloudflare;
 The bash script may run manually or can be scheduled to refresh the ip list of CloudFlare automatically.
 ```sh
 #!/bin/bash
-echo "#Cloudflare ip addresses" > /etc/nginx/cloudflare;
-echo "" >> /etc/nginx/cloudflare;
 
-echo "# - IPv4" >> /etc/nginx/cloudflare;
+CLOUDFLARE_FILE_PATH=/etc/nginx/cloudflare
+
+echo "#Cloudflare" > $CLOUDFLARE_FILE_PATH;
+echo "" >> $CLOUDFLARE_FILE_PATH;
+
+echo "# - IPv4" >> $CLOUDFLARE_FILE_PATH;
 for i in `curl https://www.cloudflare.com/ips-v4`; do
-  echo "set_real_ip_from $i;" >> /etc/nginx/cloudflare;
+    echo "set_real_ip_from $i;" >> $CLOUDFLARE_FILE_PATH;
 done
 
-echo "" >> /etc/nginx/cloudflare;
-echo "# - IPv6" >> /etc/nginx/cloudflare;
+echo "" >> $CLOUDFLARE_FILE_PATH;
+echo "# - IPv6" >> $CLOUDFLARE_FILE_PATH;
 for i in `curl https://www.cloudflare.com/ips-v6`; do
-  echo "set_real_ip_from $i;" >> /etc/nginx/cloudflare;
+    echo "set_real_ip_from $i;" >> $CLOUDFLARE_FILE_PATH;
 done
 
-echo "" >> /etc/nginx/cloudflare;
-echo "real_ip_header CF-Connecting-IP;" >> /etc/nginx/cloudflare;
+echo "" >> $CLOUDFLARE_FILE_PATH;
+echo "real_ip_header CF-Connecting-IP;" >> $CLOUDFLARE_FILE_PATH;
 
 #test configuration and reload nginx
 nginx -t && systemctl reload nginx
