@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cf_ips="$(curl -fsLm2 --retry 1 https://api.cloudflare.com/client/v4/ips)"
-CLOUDFLARE_FILE_PATH="/etc/nginx/cloudflare"
+CLOUDFLARE_FILE_PATH=${1:-/etc/nginx/cloudflare}
 
 echo "# Cloudflare IP Ranges" > $CLOUDFLARE_FILE_PATH
 echo "" >> $CLOUDFLARE_FILE_PATH
