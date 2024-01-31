@@ -35,8 +35,8 @@ done
 echo "" >> $CLOUDFLARE_FILE_PATH;
 echo "real_ip_header CF-Connecting-IP;" >> $CLOUDFLARE_FILE_PATH;
 
-#test configuration and reload nginx
-nginx -t && systemctl reload nginx
+# Test configuration and reload nginx
+nginx -t && nginx -s reload
 ```
 
 ## Output
@@ -72,7 +72,6 @@ set_real_ip_from 2a06:98c0::/29;
 set_real_ip_from 2c0f:f248::/32;
 
 real_ip_header CF-Connecting-IP;
-
 ```
 
 ## Crontab
